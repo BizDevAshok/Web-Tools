@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Distance Calculator</title>
+  <style>
+  body{
+    background-color:rgba(0, 0, 0, 0.919);
+    text-align: center;
+    color: aliceblue;
+  }
+
+  footer{
+    background: #000000;
+    color: rgba(240, 255, 255, 0.971);
+  }
+  h1{
+     color: chartreuse;
+  }
+  form{
+    color: rgb(0, 0, 0);
+    background-color: rgb(21, 235, 67);
+    margin: auto;
+    padding: 10px;
+    border-radius: 8px;
+    width: 50%;
+    height: 250px;
+  }
+  
+  span{
+    color: chartreuse;
+  }
+  </style>
+<body>
+  <h1>Distance <span></span>calculator</span></h1>
+  <form id="distanceForm">
+    <label for="initialVelocity"><b>Initial Velocity(u):</b></label>
+    <input type="number" id="initialVelocity" step="any" required><br><br>
+    
+    <label for="time"><b>Time(t):</b></label>
+    <input type="number" id="time" step="any" required><br><br>
+    
+    <label for="acceleration"><b>Acceleration(a):</b></label>
+    <input type="number" id="acceleration" step="any" required><br><br>
+    
+    <input type="submit" value="Calculate Distance">
+  </form>
+
+  <p>The  distance is = <span id="result"></span>m</p>
+
+  <script>
+    document.getElementById('distanceForm').addEventListener('submit', function(event) {
+      event.preventDefault(); 
+
+      const initialVelocity = parseFloat(document.getElementById('initialVelocity').value);
+      const time = parseFloat(document.getElementById('time').value);
+      const acceleration = parseFloat(document.getElementById('acceleration').value);
+      
+      const distance = initialVelocity * time + 0.5 * acceleration * time ** 2;
+      
+      document.getElementById('result').textContent = distance.toFixed(2);
+    });
+  </script>
+  <footer>
+    <style >
+      footer{
+        color: #fff;
+        text-align: center;
+        background-color: #000;
+      }
+    </style>
+    &copy; 2025 - by Ashok Chaulagain.
+  </footer>  
+</body>
+</html>

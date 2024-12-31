@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SI</title>
+</head>
+<style>
+    body{
+        background-color: #080808;
+    }
+    #simple {
+            width: 300px; /* Set the width */
+            height: 250px; /* Set the height */
+            margin: 0 auto; /* Center the form horizontally */
+            padding: 20px;
+            background-color: #15dfe2;
+            border: 1px solid #e20c0c;
+            border-radius: 5px;
+        }
+    
+    input[type=submit]{
+        margin-top: 20px;
+        width: 80%;
+        height: 40px;
+        font-size: 16px;
+        }
+    .button {
+        display: inline-block;
+        font-size: 17px;
+        text-align: center;
+        padding: 5px;
+        position: fixed;
+    }
+    span{
+        color: aqua;
+        font-size: 15px;
+        background-color: black;
+        text-decoration: dotted;
+        text-align: center;
+    }
+    h2{
+        text-align: center;
+        color: #080808;
+        text-decoration: underline;
+    }
+    footer{
+        color: #fff;
+        background-color: #080808;
+        text-align: center;
+    }
+    p{
+        text-align: center;
+        color: #0df137;
+    }
+
+</style>
+<body>
+    <form id="simple">
+        <h2> Calculate Simple Interest. </h2>
+
+        <label for="principal">Principle (P) =</label>
+        <input type="number" id="principal" step="any" required><br><br>
+        
+        <label for="time">Time (T) =</label>
+        <input type="number" id="time" step="any" required><br><br>
+        
+        <label for="rate">Rate (R) =</label>
+        <input type="number" id="rate" step="any" required><br><br>
+        
+        <input type="submit" value="Calculate Simple Interest">
+
+
+      </form>
+    
+      <p>The Simple Interest is: <span id="result"></span> Rs.</p>
+    
+      <script>
+        document.getElementById('simple').addEventListener('submit', function(event) {
+          event.preventDefault(); 
+    
+          const principle = parseFloat(document.getElementById('principal').value);
+          const time = parseFloat(document.getElementById('time').value);
+          const rate = parseFloat(document.getElementById('rate').value);
+          
+          const simpleInterest = (principle * time * rate) / 100;
+          
+          document.getElementById('result').textContent = simpleInterest.toFixed(2);
+        });
+      </script>
+      <footer>
+        &copy; 2024 - by Ashok Chaulagain.
+      </footer>
+</body>
+</html>

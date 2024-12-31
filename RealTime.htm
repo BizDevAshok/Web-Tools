@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Full Screen Real Time.</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #333; /* Background color of the page */
+            color: white; /* Text color */
+        }
+
+        .watch {
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            display: flex;
+            font-size: 8rem;
+        }
+
+        .time, .colon {
+            margin: 0 5px;
+        }
+
+        .colon {
+            opacity: 0.5; /* Adjust the opacity of the colons */
+        }
+    </style>
+    <title>Digital Watch</title>
+</head>
+<body>
+    <div class="watch" id="watch">
+        <div class="time" id="hour">00</div>
+        <div class="colon">:</div>
+        <div class="time" id="minute">00</div>
+        <div class="colon">:</div>
+        <div class="time" id="second">00</div>
+    </div>
+
+    <script>
+        function updateClock() {
+            const now = new Date();
+            const hour = now.getHours().toString().padStart(2, '0');
+            const minute = now.getMinutes().toString().padStart(2, '0');
+            const second = now.getSeconds().toString().padStart(2, '0');
+
+            document.getElementById('hour').textContent = hour;
+            document.getElementById('minute').textContent = minute;
+            document.getElementById('second').textContent = second;
+        }
+
+        // Update the clock every second
+        setInterval(updateClock, 1000);
+
+        // Initial update
+        updateClock();
+    </script>
+</body>
+</html>

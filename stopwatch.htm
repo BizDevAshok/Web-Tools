@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stopwatch</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f00fdd;
+        }
+
+        .stopwatch-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px;
+            border: 3px solid #06f61e;
+            border-radius: 5px;
+            background-color: #0d0e0d;
+        }
+
+        .display {
+            font-size: 2em;
+            color: aliceblue;
+            padding: 8px;
+            width: 180px;
+            margin: 20px 40px;
+            background-color: #e80ce1;
+            border: 2px solid #0cf413;
+            border-radius: 5px;
+            align-items: center;
+        }
+
+        button {
+            font-size: 1em;
+            width: 80px;
+            padding: 10px;
+            margin: 30px;
+            cursor: pointer;
+            background-color: #f010d6;
+            color: #fff;
+            border: 2.5px solid #08ed32;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0ea9ec;
+        }
+        h4{
+            color: #06c2f6;
+            text-align: center;
+            text-decoration: dotted;
+        }
+    </style>
+</head>
+<body>
+    <div class="stopwatch-container">
+        <div class="stopwatch">
+            <h4>Click Start button to start the stopwatch.</h4>
+            <div class="display" id="display">00:00:00.000</div>
+            <button id="startStopBtn" onclick="toggleStopwatch()">Start</button>
+            <button onclick="resetStopwatch()">Reset</button>
+        </div>
+    </div>
+    
+    
+    
+    <script>
+        let timer;
+        let milliseconds = 0;
+        let seconds = 0;
+        let minutes = 0;
+        let hours = 0;
+
+        function toggleStopwatch() {
+            if (timer) {
+                stopStopwatch();
+            } else {
+                startStopwatch();
+            }
+        }
+
+        function startStopwatch() {
+            if (!timer) {
+                timer = setInterval(updateStopwatch, 10);
+                document.getElementById("display").innerText = formatTime(hours, minutes, seconds, milliseconds);
+                document.getElementById("startStopBtn").innerText = "Stop";
+            }
+        }
+
+        function stopStopwatch() {
+            clearInterval(timer);
+            timer = null;
+            document.getElementById("startStopBtn").innerText = "Start";
+        }
+
+        function resetStopwatch() {
+            stopStopwatch();
+            milliseconds = 0;
+            seconds = 0;
+            minutes = 0;
+            hours = 0;
+            document.getElementById("display").innerText = formatTime(hours, minutes, seconds, milliseconds);
+        }
+
+        function updateStopwatch() {
+            milliseconds += 10;
+            if (milliseconds === 1000) {
+                milliseconds = 0;
+                seconds++;
+                if (seconds === 60) {
+                    seconds = 0;
+                    minutes++;
+                    if (minutes === 60) {
+                        minutes = 0;
+                        hours++;
+                    }
+                }
+            }
+            document.getElementById("display").innerText = formatTime(hours, minutes, seconds, milliseconds);
+        }
+
+        function formatTime(hours, minutes, seconds, milliseconds) {
+            return `${pad(hours)}:${pad(minutes)}:${pad(seconds)}:${padMilliseconds(milliseconds)}`;
+        }
+
+        function pad(value) {
+            return value < 10 ? `0${value}` : value;
+        }
+
+        function padMilliseconds(value) {
+            return value < 10 ? `00${value}` : value < 100 ? `0${value}` : value;
+        }
+    </script>
+</body>
+</html>

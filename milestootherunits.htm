@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .converter-container {
+      background-color: #e116d3;
+      border: 2px solid #16e335;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(18, 219, 55, 0.927);
+      width: 300px;
+      text-align: center;
+    }
+
+    .input-field {
+      margin-bottom: 15px;
+    }
+
+    .output {
+      font-weight: bold;
+      margin-top: 15px;
+    }
+
+    input, select {
+      padding: 8px;
+      width: calc(100% - 16px);
+      box-sizing: border-box;
+      margin-bottom: 5px;
+    }
+
+    button {
+      background-color: #30e11c;
+      color: #fff;
+      padding: 10px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      width: 100%;
+    }
+  </style>
+  <title>Length Converter</title>
+</head>
+<body>
+
+<div class="converter-container">
+  <h2>Miles Converter</h2>
+  <div class="input-field">
+    <label for="length">Enter Miles:</label>
+    <input type="number" id="length" placeholder="Enter a positive number" required>
+  </div>
+  <div class="input-field">
+    <label for="unit">Select Unit:</label>
+    <select id="unit">
+      <option value="centimeters">Centimeters</option>
+      <option value="meters">Meters</option>
+      <option value="feet">Feet</option>
+      <option value="kilometers">Kilometers</option>
+      <option value="yards">Yards</option>
+      <option value="inches">Inches</option>
+    </select>
+  </div>
+  <button onclick="convert()">Convert</button>
+  <div class="output" id="output"></div>
+</div>
+
+<script>
+  function convert() {
+    const lengthInput = document.getElementById('length').value;
+    const unitSelect = document.getElementById('unit');
+    const selectedUnit = unitSelect.options[unitSelect.selectedIndex].value;
+
+    if (!lengthInput || lengthInput <= 0) {
+      alert("Please enter a valid positive number for length.");
+      return;
+    }
+
+    let result;
+
+    switch (selectedUnit) {
+      case 'centimeters':
+        result = lengthInput * 160934;  // 1 mile = 160,934 centimeters
+        break;
+      case 'meters':
+        result = lengthInput * 1609.34;  // 1 mile = 1,609.34 meters
+        break;
+      case 'feet':
+        result = lengthInput * 5280;  // 1 mile = 5,280 feet
+        break;
+      case 'kilometers':
+        result = lengthInput * 1.60934;  // 1 mile = 1.60934 kilometers
+        break;
+      case 'yards':
+        result = lengthInput * 1760;  // 1 mile = 1,760 yards
+        break;
+      case 'inches':
+        result = lengthInput * 63360;  // 1 mile = 63,360 inches
+        break;
+      default:
+        result = 'Invalid Unit';
+    }
+
+    document.getElementById('output').innerText = `Result: ${result.toFixed(2)} ${selectedUnit}`;
+  }
+</script>
+
+</body>
+</html>
